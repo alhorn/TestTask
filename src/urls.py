@@ -12,7 +12,7 @@ schema_view = get_schema_view(
         title="API",
         default_version='v1',
         description="API documentation",
-        contact=openapi.Contact(email="alexeypushilov@kandk.team"),
+        contact=openapi.Contact(email="alexeypushilov@gmail.com"),
     ),
     public=True,
     permission_classes=(permissions.AllowAny,),
