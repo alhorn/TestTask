@@ -1,9 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from rest_framework.exceptions import ValidationError
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from accounts.managers import UserManager
+
+
+class ImageFile(models.Model):
+    image = models.ImageField('image', upload_to='images/')
+    created_at = models.DateTimeField(verbose_name='created at', auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Image File'
+        verbose_name_plural = 'Image Files'
 
 
 class User(AbstractUser):
@@ -23,6 +31,14 @@ class User(AbstractUser):
     patronymic = models.CharField('patronymic', max_length=150)
     email = models.EmailField('email address', unique=True)
     phone = models.CharField(verbose_name='phone', max_length=255, unique=True)
+    avatar = models.ForeignKey(
+        to=ImageFile,
+        verbose_name='avatar',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='user_avatar'
+    )
     role = models.CharField('role', max_length=8, choices=Roles.choices, default=Roles.worker)
     is_can_create_tasks = models.BooleanField(verbose_name='is_can_create_tasks', default=False)
     is_have_access_to_tasks = models.BooleanField(verbose_name='is_have_access_to_tasks', default=False)

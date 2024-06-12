@@ -2,11 +2,14 @@ from django.utils.timezone import now
 from rest_framework import serializers
 
 from accounts.models import User
+from accounts.serializers import UserSerializer
 from tasks.models import Task
 
 
 class TaskSerializer(serializers.ModelSerializer):
     customer_id = serializers.IntegerField(write_only=True, allow_null=True, required=False)
+    customer = UserSerializer(read_only=True)
+    worker = UserSerializer(read_only=True)
 
     class Meta:
         model = Task

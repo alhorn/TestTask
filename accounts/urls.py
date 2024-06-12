@@ -1,7 +1,7 @@
 from django.urls import path
 from rest_framework_simplejwt.views import TokenRefreshView
 
-from accounts.views import RegisterAPIView, LoginAPIView, UserViewSet, CreateUserView
+from accounts.views import RegisterAPIView, LoginAPIView, UserViewSet, CreateUserView, ImageUploadView
 from src.custom_router import CustomRouter
 
 router = CustomRouter()
@@ -13,4 +13,5 @@ urlpatterns = [
     path('accounts/me/', UserViewSet.as_view({'get': 'retrieve'}), name='accounts_me'),
     path('accounts/', UserViewSet.as_view({'get': 'list'}), name='accounts'),
     path('accounts/create/', CreateUserView.as_view(), name='accounts_create'),
+    path('images/upload/', ImageUploadView.as_view()),
 ] + router.urls

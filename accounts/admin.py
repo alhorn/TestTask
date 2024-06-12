@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from accounts.models import User
+from accounts.models import User, ImageFile
 
 
 @admin.register(User)
@@ -25,3 +25,8 @@ class UserAdmin(admin.ModelAdmin):
     )
     search_fields = ('email', 'username')
     ordering = ('email',)
+
+
+@admin.register(ImageFile)
+class ImageFileAdmin(admin.ModelAdmin):
+    list_display = ('id', 'image', 'created_at')
